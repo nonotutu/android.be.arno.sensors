@@ -1,0 +1,59 @@
+<h3>display modes</h3>
+
+<ul>
+<p>
+<li>
+<dt> <b> merged </b> </dt>
+<dd> all the COURBES share the same x axis </dd>
+</li>
+</p>
+<p>
+<li>
+<dt> <b> split </b> </dt>
+<dd> one different x axis per COURBE </dd>
+</li>
+</p>
+<p>
+<li>
+<dt> <b> average </b> </dt>
+<dd> all values averaged in only one COURBE </dd>
+</li>
+</p>
+</ul>
+
+<hr/>
+
+<h3> sensor delay</h3>
+<p>
+Sets the delay between each update of the values from the sensor.
+</p>
+<p>
+Smaller delay means more smooth COURBE, but may be 
+</p>
+
+<ul>
+<p>
+<li>
+<dt> <b> normal </b> </dt>
+<dd> sjdqsdqsd </dd>
+</li>
+</p>
+<p>
+<li>
+<dt> <b> ui </b> </dt>
+<dd> pdfispdofsdf </dd>
+</li>
+</p>
+<p>
+<li>
+<dt> <b> game </b> </dt>
+<dd> skjdslkjds </dd>
+</li>
+</p>
+<p>
+<li>
+<dt> <b> fastest </b> </dt>
+<dd> sdkljqlskdjiofuds </dd>
+</li>
+</p>
+</ul>

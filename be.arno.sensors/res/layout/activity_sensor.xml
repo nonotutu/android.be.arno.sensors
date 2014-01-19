@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/be.arno.sensors"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sensor_rela"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".SensorActivity" >
+
+    <be.arno.sensors.graphing.Graphe
+        android:id="@+id/sensor_graphe"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/sensor_vwfp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+    </be.arno.sensors.graphing.Graphe>
+
+    <RelativeLayout
+        android:id="@+id/sensor_relaLegend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <TextView
+            android:id="@+id/sensor_txvwName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingLeft="12dp"
+            android:paddingTop="4dp"
+            android:text="@string/loremipsum"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/sensor_txvwValues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sensor_txvwName"
+            android:layout_toRightOf="@+id/sensor_txvwColors"
+            android:paddingLeft="4dp"
+            android:paddingTop="4dp"
+            android:text="@string/loremipsum" />
+
+        <TextView
+            android:id="@+id/sensor_txvwColors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/sensor_txvwName"
+            android:paddingLeft="12dp"
+            android:paddingTop="4dp"
+            android:text="@string/loremipsum" />
+    </RelativeLayout>
+
+     <ViewFlipper
+        android:id="@+id/sensor_vwfp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center_vertical" >
+
+         <LinearLayout
+             android:id="@+id/sensor_lilaOptions"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_margin="16dp"
+             android:orientation="vertical" >
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <be.arno.sensors.MultiStatesToggle
+                     android:id="@+id/sensor_mstgDelay"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="3" />
+
+                 <Button
+                     android:id="@+id/sensor_bttnHelp"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/help" />
+
+                 <be.arno.sensors.MultiStatesToggle
+                     android:id="@+id/sensor_bttnSplit"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="3" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <Button
+                     android:id="@+id/sensor_bttnMaxPointsMinus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/minus" />
+
+                 <LinearLayout
+                     android:layout_width="0dip"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:gravity="center_horizontal"
+                     android:orientation="vertical" >
+
+                     <TextView
+                         android:id="@+id/textView1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/max_points" />
+
+                     <TextView
+                         android:id="@+id/sensor_txvwMaxPoints"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/loremipsum"
+                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                 </LinearLayout>
+
+                 <Button
+                     android:id="@+id/sensor_bttnMaxPointsPlus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/plus" />
+             </LinearLayout>
+
+             <View
+                 android:layout_width="fill_parent"
+                 android:layout_height="1dp"
+                 android:background="@android:color/darker_gray" />
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <Button
+                     android:id="@+id/sensor_bttnXTimeFactorMinus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/minus" />
+
+                 <LinearLayout
+                     android:layout_width="0dip"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:gravity="center_horizontal"
+                     android:orientation="vertical" >
+
+                     <TextView
+                         android:id="@+id/textView2"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/x_factor" />
+
+                     <TextView
+                         android:id="@+id/sensor_txvwXTimeFactor"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/loremipsum"
+                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                 </LinearLayout>
+
+                 <Button
+                     android:id="@+id/sensor_bttnXTimeFactorPlus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/plus" />
+             </LinearLayout>
+
+             <View
+                 android:layout_width="fill_parent"
+                 android:layout_height="1dp"
+                 android:background="@android:color/darker_gray" />
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <Button
+                     android:id="@+id/sensor_bttnYZoomFactorMinus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/minus" />
+
+                 <LinearLayout
+                     android:layout_width="0dip"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:gravity="center_horizontal"
+                     android:orientation="vertical" >
+
+                     <TextView
+                         android:id="@+id/textView5"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/y_factor" />
+
+                     <TextView
+                         android:id="@+id/sensor_txvwYZoomFactor"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/loremipsum"
+                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                 </LinearLayout>
+
+                 <Button
+                     android:id="@+id/sensor_bttnYZoomFactorPlus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/plus" />
+             </LinearLayout>
+         </LinearLayout>
+
+         <LinearLayout
+             android:id="@+id/sensor_lilaDesign"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_margin="16dp"
+             android:orientation="vertical" >
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <be.arno.sensors.MultiStatesToggle
+                     android:id="@+id/sensor_mstgMarkerType"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="3" />
+                 
+                 <Button
+                     android:id="@+id/sensor_bttnBackColor"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1"
+                     android:layout_margin="5sp"
+                     android:text="+"
+                      />
+                 
+  				<Button
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:text="boum"
+                      />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <Button
+                     android:id="@+id/sensor_bttnLineWidthMinus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/minus" />
+
+                 <LinearLayout
+                     android:layout_width="0dip"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:gravity="center_horizontal"
+                     android:orientation="vertical" >
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/line_width" />
+
+                     <TextView
+                         android:id="@+id/sensor_txvwLineWidth"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/loremipsum"
+                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                 </LinearLayout>
+
+                 <Button
+                     android:id="@+id/sensor_bttnLineWidthPlus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/plus" />
+             </LinearLayout>
+
+			<View
+                 android:layout_width="fill_parent"
+                 android:layout_height="1dp"
+                 android:background="@android:color/darker_gray" />
+             
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal" >
+
+                 <Button
+                     android:id="@+id/sensor_bttnPointSizeMinus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/minus" />
+
+                 <LinearLayout
+                     android:layout_width="0dip"
+                     android:layout_height="match_parent"
+                     android:layout_weight="3"
+                     android:gravity="center_horizontal"
+                     android:orientation="vertical" >
+
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/point_size" />
+
+                     <TextView
+                         android:id="@+id/sensor_txvwPointSize"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:gravity="center_horizontal"
+                         android:text="@string/loremipsum"
+                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                 </LinearLayout>
+
+                 <Button
+                     android:id="@+id/sensor_bttnPointSizePlus"
+                     android:layout_width="0dip"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:text="@string/plus" />
+             </LinearLayout>
+         </LinearLayout>
+        
+    
+    </ViewFlipper>
+
+</RelativeLayout>
