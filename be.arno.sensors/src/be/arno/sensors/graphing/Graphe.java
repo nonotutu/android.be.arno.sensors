@@ -35,6 +35,10 @@ public class Graphe extends View {
 	public static final int MARKER_TYPE_LINE = 0;
 	public static final int MARKER_TYPE_POINT = 1;
 	public static final int MARKER_TYPE_LINEnPOINT = 2;
+
+	public static final int DRAW_AXIS = 0;
+	public static final int DRAW_SECONDS = 1;
+	public static final int NO_AXIS = 2;
 	
 	// Calculés automatiquement
 	private int w, h;
@@ -49,6 +53,7 @@ public class Graphe extends View {
     private int marker_type = 0; // MARKER_TYPE_LINE
 	private int max_markers = 100;
 	private int marker_colors[];
+	private int draw_axis = 0;
 	
 	// Paramétrables : opérations en aval
 	private int back_color = 0xFF000000;
@@ -105,6 +110,8 @@ public class Graphe extends View {
 	public void setColors(int[] colors) { marker_colors = colors; }
 	
 	public void setMarkerType(int marker_type) { this.marker_type = marker_type; }
+	
+	public void setDrawAxis(int draw_axis) { this.draw_axis = draw_axis; }
 	
 	
 
@@ -183,45 +190,44 @@ public class Graphe extends View {
         super.onDraw(canvas);
         
         // Dessine un repère à 1, 4 et 10 secondes sur l'axe des x
-		canvas.drawLine(
-				w - ( 1000 / xTimeFactor ),
-				h/2 - 10,
-				w - ( 1000 / xTimeFactor ),
-				h/2 + 10,
-				xAxisPaint);        
-		canvas.drawLine(
-				w - ( 4000 / xTimeFactor ),
-				h/2 - 40,
-				w - ( 4000 / xTimeFactor ),
-				h/2 + 40,
-				xAxisPaint);        
-		canvas.drawLine(
-				w - ( 10000 / xTimeFactor ),
-				h/2 - 100,
-				w - ( 10000 / xTimeFactor ),
-				h/2 + 100,
-				xAxisPaint);
+        if ( draw_axis == DRAW_SECONDS )
+	        for ( int i = 0 ; i < w * xTimeFactor ; i += 1000 )
+	        	if ( i%10000 == 0 )
+	        		canvas.drawLine(
+	        				w - ( i / xTimeFactor ),
+	        				h/2 - 20,
+	        				w - ( i / xTimeFactor ),
+	        				h/2 + 20,
+	        				xAxisPaint);        
+	        	else
+					canvas.drawLine(
+							w - ( i / xTimeFactor ),
+							h/2 - 10,
+							w - ( i / xTimeFactor ),
+							h/2 + 10,
+							xAxisPaint);
 
 		// Dessine l'axe des x
-		switch (mode) {
-		case MODE_MERGED:
-        	canvas.drawLine(
-				w,
-				h/2,
-				0,
-				h/2,
-				xAxisPaint);
-        	break;
-		case MODE_SPLIT:
-        	for ( int i = 0 ; i < numberOfDatas ; i += 1 )
-        		canvas.drawLine(
-        				w,
-        				h/2/numberOfDatas + i * h/numberOfDatas,
-        				0,
-        				h/2/numberOfDatas + i * h/numberOfDatas,
-        				xAxisPaint);
-        	break;
-		}
+        if ( draw_axis == DRAW_AXIS || draw_axis == DRAW_SECONDS )
+			switch (mode) {
+			case MODE_MERGED:
+	        	canvas.drawLine(
+					w,
+					h/2,
+					0,
+					h/2,
+					xAxisPaint);
+	        	break;
+			case MODE_SPLIT:
+	        	for ( int i = 0 ; i < numberOfDatas ; i += 1 )
+	        		canvas.drawLine(
+	        				w,
+	        				h/2/numberOfDatas + i * h/numberOfDatas,
+	        				0,
+	        				h/2/numberOfDatas + i * h/numberOfDatas,
+	        				xAxisPaint);
+	        	break;
+			}
 
         for ( int i = 0 ; i < numberOfDatas ; i += 1 )
         	for ( int j = 1 ; j < pointss.get(i).size() ; j += 1 ) {

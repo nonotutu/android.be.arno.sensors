@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Random;
 
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -45,7 +47,7 @@ public class SensorsActivity extends Activity implements SensorEventListener {
 	    RelativeLayout rela = (RelativeLayout)findViewById(R.id.sensors_rela);
 	    LinearLayout lila = (LinearLayout)findViewById(R.id.sensors_lila);
 	    
-	    rela.setBackgroundColor(0xFFFFFFFF/*0xFF669900*/);
+	    // rela.setBackgroundColor(0xFFFFFFFF/*0xFF669900*/);
 
 	    backColors = new int[]{
 			0x7F000000 + getResources().getColor(R.color.a_light_blue),
@@ -61,7 +63,13 @@ public class SensorsActivity extends Activity implements SensorEventListener {
 	    Iterator<Sensor> sensors = deviceSensors.iterator();
 	    while (sensors.hasNext())
 	        lila.addView(caseSensor(sensors.next()));
+	    
+	    
+	    
+	    
 	}
+	
+	
 	
 
 	private String enTete(Sensor s) {

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -34,10 +35,12 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+import android.widget.RelativeLayout.LayoutParams;
 
 
 public class SensorActivity extends Activity implements SensorEventListener {
@@ -57,6 +60,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	private MultiStatesToggle mstgSplit;
 	private MultiStatesToggle mstgDelay;
 	private MultiStatesToggle mstgMarkerType;
+	private MultiStatesToggle mstgAxis;
 
 	private int[] colors;
 
@@ -67,9 +71,9 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	private TextView txvwName;
 	private TextView txvwValues;
 	private TextView txvwColors;
-	private TextView txvwMaxPoints;
-	private Button bttnMaxPointsPlus;
-	private Button bttnMaxPointsMinus;
+	private TextView txvwMaxMarkers;
+	private Button bttnMaxMarkersPlus;
+	private Button bttnMaxMarkersMinus;
 	private TextView txvwXTimeFactor;
 	private Button bttnXTimeFactorPlus;
 	private Button bttnXTimeFactorMinus;
@@ -88,9 +92,11 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	private float yZoomFactors[] = {1,2,3,4};
 	private int lineWidths[] = {1,2,3,4,5,6,7,8};
 	private int pointSizes[] = {1,2,3,4,5,6,7,8};
-	private int backColors[][] = {new int[]{0xFF000000, 0xFFFFFFFF},
+	private int backColors[][] = {
+			new int[]{0xFF000000, 0xFFFFFFFF},
 			new int[]{0xFF7F7F7F, 0xFFFFFFFF},
-			new int[]{0xFFFFFFFF, 0xFF000000}};
+			new int[]{0xFFFFFFFF, 0xFF000000}
+			};
 	
 	private static Graphe graphe;
 	
@@ -103,7 +109,11 @@ public class SensorActivity extends Activity implements SensorEventListener {
     private Animation mOutToLeft;
     private Animation mInFromLeft;
     private Animation mOutToRight;
-	
+    
+    private TextView[] txvwsColors;
+    private LinearLayout lilaColors;
+    private LinearLayout.LayoutParams custom_textview_params;
+    
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
@@ -119,19 +129,6 @@ public class SensorActivity extends Activity implements SensorEventListener {
 		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 		sensor = mSensorManager.getDefaultSensor(sensor_type);
 		numberOfEvents = 0;
-
-		colors = new int[]{
-        		getResources().getColor(R.color.a_light_blue),
-        		getResources().getColor(R.color.a_light_purple),
-        		getResources().getColor(R.color.a_light_green),
-        		getResources().getColor(R.color.a_light_orange),
-        		getResources().getColor(R.color.a_light_red),
-        		getResources().getColor(R.color.a_dark_blue),
-        		getResources().getColor(R.color.a_dark_purple),
-        		getResources().getColor(R.color.a_dark_green),
-        		getResources().getColor(R.color.a_dark_orange),
-        		getResources().getColor(R.color.a_dark_red)
-        		};
 
 	    isFillScreen = false;
 	    
@@ -166,6 +163,17 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    				getResources().getString(R.string.marker_type_line),
 	    				getResources().getString(R.string.marker_type_line_point),
 	    				getResources().getString(R.string.marker_type_point)});
+	    
+	    mstgAxis.setContent(
+	    		new int[]{
+	    				Graphe.DRAW_AXIS,
+	    				Graphe.DRAW_SECONDS,
+	    				Graphe.NO_AXIS},
+	    		new String[]{
+	    				getResources().getString(R.string.draw_axis),
+	    				getResources().getString(R.string.draw_seconds),
+	    				getResources().getString(R.string.no_axis)});
+
 
 	    SharedPreferences settings = getSharedPreferences("sensor_prefs" + sensor.getType(), 0);
 		
@@ -178,8 +186,22 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    pointSize = settings.getInt( "point_size", 5);
 	    mstgMarkerType.setStateFromValue( settings.getInt( "marker_type", Graphe.MARKER_TYPE_LINE ) );
 	    backColor = settings.getInt( "back_color", 0);
+	    mstgAxis.setStateFromValue( settings.getInt( "draw_axis", 0 ) );
   		
-		txvwMaxPoints.setText("" + maxMarkers);
+	    colors = new int[]{
+        		settings.getInt( "colors_0", getResources().getColor(R.color.a_light_blue)),
+        		settings.getInt( "colors_1", getResources().getColor(R.color.a_light_purple)),
+        		settings.getInt( "colors_2", getResources().getColor(R.color.a_light_green)),
+        		settings.getInt( "colors_3", getResources().getColor(R.color.a_light_orange)),
+        		settings.getInt( "colors_4", getResources().getColor(R.color.a_light_red)),
+        		settings.getInt( "colors_5", getResources().getColor(R.color.a_dark_blue)),
+        		settings.getInt( "colors_6", getResources().getColor(R.color.a_dark_purple)),
+        		settings.getInt( "colors_7", getResources().getColor(R.color.a_dark_green)),
+        		settings.getInt( "colors_8", getResources().getColor(R.color.a_dark_orange)),
+        		settings.getInt( "colors_9", getResources().getColor(R.color.a_dark_red))
+        		};
+	    
+		txvwMaxMarkers.setText("" + maxMarkers);
 	    txvwXTimeFactor.setText("" + xTimeFactors[xTimeFactor]);
 	    txvwYZoomFactor.setText("" + yZoomFactors[yZoomFactor]);
 	    txvwLineWidth.setText("" + lineWidths[lineWidth]);
@@ -193,13 +215,14 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    graphe.setYZoomFactor(yZoomFactors[yZoomFactor]);
 
 	    graphe.changeAxisWidth(3);
-	    graphe.changeMarkerLineWidth(lineWidth);
-	    graphe.changeMarkerPointSize(pointSize);
+	    graphe.changeMarkerLineWidth(lineWidths[lineWidth]);
+	    graphe.changeMarkerPointSize(pointSizes[pointSize]);
 	    graphe.setMarkerType(mstgMarkerType.getValue());
 	    graphe.setMode(mstgSplit.getValue());
 
 		graphe.setBackgroundColor(backColors[backColor][0]);
 		graphe.changeAxisColor(backColors[backColor][1]);
+		graphe.setDrawAxis(mstgAxis.getValue());
 	    
 	    txvwName.setTextColor(backColors[backColor][1]);
 	    txvwValues.setTextColor(backColors[backColor][1]);
@@ -207,6 +230,52 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    txvwName.setText(sensor.getName());
 	    bttnBackColor.setBackgroundColor(backColors[backColor][0]);
 	    bttnBackColor.setTextColor(backColors[backColor][1]);
+	    
+	    lilaColors = (LinearLayout)findViewById(R.id.sensor_lilaColors);
+	    
+	    custom_textview_params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+	    custom_textview_params.weight = 1;
+	    custom_textview_params .setMargins(
+	    		getResources().getDimensionPixelSize(R.dimen.custom_textview_margin),
+        		getResources().getDimensionPixelSize(R.dimen.custom_textview_margin),
+        		getResources().getDimensionPixelSize(R.dimen.custom_textview_margin),
+        		getResources().getDimensionPixelSize(R.dimen.custom_textview_margin));
+        generateColors();
+	}
+	
+	
+	private void generateColors() {
+		
+		lilaColors.removeAllViews();
+		
+	    final TextView txvwColors[] = new TextView[10];
+	    for ( int i = 0 ; i < 10 ; i += 1 ) {
+	    	TextView txvw = new TextView(getApplicationContext());
+	        txvw.setActivated(true);
+	        txvw.setLayoutParams(custom_textview_params );
+		    txvw.setBackgroundColor(colors[i]);
+		    final int ii = i;
+		    txvw.setOnClickListener(
+	        		new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+
+							if ( ii != 0 ) {
+							
+								int temp = colors[ii];
+								
+								colors[ii] = colors[0];
+								colors[0] = temp;
+
+								generateColors();
+								graphe.changeColors(colors);
+								numberOfEventsOrColorsHasChanged();
+							}
+							
+						}});
+		    txvwColors[i] = txvw;
+		    lilaColors.addView(txvw);
+	    }
 	
 	}
 	
@@ -230,7 +299,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	}
 	
 	
-	public void numberOfEventsHasChanged() {
+	public void numberOfEventsOrColorsHasChanged() {
 		
 		String carrés = "";
 
@@ -260,9 +329,9 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    txvwValues =           (TextView)         findViewById(R.id.sensor_txvwValues);
 	    txvwColors =           (TextView)         findViewById(R.id.sensor_txvwColors);
 
-	    txvwMaxPoints =        (TextView)         findViewById(R.id.sensor_txvwMaxPoints);
-        bttnMaxPointsPlus =    (Button)           findViewById(R.id.sensor_bttnMaxPointsPlus);
-        bttnMaxPointsMinus =   (Button)           findViewById(R.id.sensor_bttnMaxPointsMinus);
+	    txvwMaxMarkers =       (TextView)         findViewById(R.id.sensor_txvwMaxMarkers);
+        bttnMaxMarkersPlus =   (Button)           findViewById(R.id.sensor_bttnMaxMarkersPlus);
+        bttnMaxMarkersMinus =  (Button)           findViewById(R.id.sensor_bttnMaxMarkersMinus);
   	    txvwXTimeFactor =      (TextView)         findViewById(R.id.sensor_txvwXTimeFactor);
         bttnXTimeFactorPlus =  (Button)           findViewById(R.id.sensor_bttnXTimeFactorPlus);
         bttnXTimeFactorMinus = (Button)           findViewById(R.id.sensor_bttnXTimeFactorMinus);
@@ -279,6 +348,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
         mstgSplit =            (MultiStatesToggle)findViewById(R.id.sensor_bttnSplit);
         mstgMarkerType =       (MultiStatesToggle)findViewById(R.id.sensor_mstgMarkerType);
         bttnBackColor =        (Button)           findViewById(R.id.sensor_bttnBackColor);
+        mstgAxis =             (MultiStatesToggle)findViewById(R.id.sensor_mstgAxis);
 
         // Retient les paddings du graphe en Pas FillScreen
         layoutPadding = new int[4];
@@ -313,31 +383,31 @@ public class SensorActivity extends Activity implements SensorEventListener {
 					}
 				});
 
-	    bttnMaxPointsPlus.setOnClickListener(
+	    bttnMaxMarkersPlus.setOnClickListener(
 	    		new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						maxMarkers += 10;
 						graphe.setMaxMarkers(maxMarkers);
-						txvwMaxPoints.setText(""+graphe.getMaxMarkers());
+						txvwMaxMarkers.setText(""+graphe.getMaxMarkers());
 					}
 				});
 
-	    bttnMaxPointsMinus.setOnClickListener(
+	    bttnMaxMarkersMinus.setOnClickListener(
 	    		new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						maxMarkers -= 10;
 						graphe.setMaxMarkers(maxMarkers);
-						txvwMaxPoints.setText(""+graphe.getMaxMarkers());
+						txvwMaxMarkers.setText(""+graphe.getMaxMarkers());
 					}
 				});
 	    
-	    txvwMaxPoints.setOnClickListener(
+	    txvwMaxMarkers.setOnClickListener(
 	    		new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						txvwMaxPoints.setText(""+graphe.getNumberPoints());
+						txvwMaxMarkers.setText(""+graphe.getNumberPoints());
 					}
 				});
 	    
@@ -465,6 +535,14 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    			}
 	    		});
 	    
+	    mstgAxis.setOnClickListener(
+	    		new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						graphe.setDrawAxis(mstgAxis.getValue());
+					}
+				});
+	    
 	    viewFlipper = (ViewFlipper) findViewById(R.id.sensor_vwfp);
         viewFlipper.setDisplayedChild(0);
         
@@ -491,8 +569,18 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	      editor.putInt( "point_size", pointSize );
 	      editor.putInt( "marker_type", mstgMarkerType.getValue() );
 	      editor.putInt( "back_color", backColor );
+	      editor.putInt( "draw_axis", mstgAxis.getValue() );
+	      editor.putInt( "colors_0", colors[0] );
+	      editor.putInt( "colors_1", colors[1] );
+	      editor.putInt( "colors_2", colors[2] );
+	      editor.putInt( "colors_3", colors[3] );
+	      editor.putInt( "colors_4", colors[4] );
+	      editor.putInt( "colors_5", colors[5] );
+	      editor.putInt( "colors_6", colors[6] );
+	      editor.putInt( "colors_7", colors[7] );
+	      editor.putInt( "colors_8", colors[8] );
+	      editor.putInt( "colors_9", colors[9] );
 	      editor.commit();
-
 	}
 	
 	@Override
@@ -506,7 +594,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 		
 		if ( event.values.length != numberOfEvents ) {
 			numberOfEvents = event.values.length;
-			numberOfEventsHasChanged();
+			numberOfEventsOrColorsHasChanged();
 		}
 		
 		if ( txvwValues.getVisibility() == View.VISIBLE ) {

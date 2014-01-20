@@ -34,7 +34,7 @@
             android:paddingLeft="12dp"
             android:paddingTop="4dp"
             android:text="@string/loremipsum"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <TextView
             android:id="@+id/sensor_txvwValues"
@@ -79,12 +79,14 @@
                  android:orientation="horizontal" >
 
                  <be.arno.sensors.MultiStatesToggle
+                     style="@style/button_clear"
                      android:id="@+id/sensor_mstgDelay"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
                      android:layout_weight="3" />
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnHelp"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -92,6 +94,7 @@
                      android:text="@string/help" />
 
                  <be.arno.sensors.MultiStatesToggle
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnSplit"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -104,12 +107,13 @@
                  android:orientation="horizontal" >
 
                  <Button
-                     android:id="@+id/sensor_bttnMaxPointsMinus"
+                     style="@style/button_clear"
+                     android:id="@+id/sensor_bttnMaxMarkersMinus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
                      android:layout_weight="1"
                      android:text="@string/minus" />
-
+                 
                  <LinearLayout
                      android:layout_width="0dip"
                      android:layout_height="match_parent"
@@ -122,10 +126,10 @@
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:gravity="center_horizontal"
-                         android:text="@string/max_points" />
+                         android:text="@string/max_markers" />
 
                      <TextView
-                         android:id="@+id/sensor_txvwMaxPoints"
+                         android:id="@+id/sensor_txvwMaxMarkers"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"
                          android:gravity="center_horizontal"
@@ -134,7 +138,8 @@
                  </LinearLayout>
 
                  <Button
-                     android:id="@+id/sensor_bttnMaxPointsPlus"
+                     style="@style/button_clear"
+                     android:id="@+id/sensor_bttnMaxMarkersPlus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
                      android:layout_weight="1"
@@ -152,6 +157,7 @@
                  android:orientation="horizontal" >
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnXTimeFactorMinus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -182,6 +188,7 @@
                  </LinearLayout>
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnXTimeFactorPlus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -200,6 +207,7 @@
                  android:orientation="horizontal" >
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnYZoomFactorMinus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -230,6 +238,7 @@
                  </LinearLayout>
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnYZoomFactorPlus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -251,25 +260,29 @@
                  android:orientation="horizontal" >
 
                  <be.arno.sensors.MultiStatesToggle
+                     style="@style/button_clear"
                      android:id="@+id/sensor_mstgMarkerType"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
                      android:layout_weight="3" />
                  
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnBackColor"
                      android:layout_width="0dp"
                      android:layout_height="match_parent"
                      android:layout_weight="1"
-                     android:layout_margin="5sp"
-                     android:text="+"
+                     android:layout_margin="@dimen/custom_textview_margin"
+                     android:text="@string/plus"
                       />
                  
-  				<Button
+  				<be.arno.sensors.MultiStatesToggle
+  				    android:id="@+id/sensor_mstgAxis"
+                     style="@style/button_clear"
                      android:layout_width="0dp"
                      android:layout_height="match_parent"
                      android:layout_weight="3"
-                     android:text="boum"
+                     android:text="@string/loremipsum"
                       />
              </LinearLayout>
 
@@ -279,6 +292,7 @@
                  android:orientation="horizontal" >
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnLineWidthMinus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -308,6 +322,7 @@
                  </LinearLayout>
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnLineWidthPlus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -326,6 +341,7 @@
                  android:orientation="horizontal" >
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnPointSizeMinus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
@@ -355,15 +371,30 @@
                  </LinearLayout>
 
                  <Button
+                     style="@style/button_clear"
                      android:id="@+id/sensor_bttnPointSizePlus"
                      android:layout_width="0dip"
                      android:layout_height="wrap_content"
                      android:layout_weight="1"
                      android:text="@string/plus" />
              </LinearLayout>
-         </LinearLayout>
+             
+             
+			<View
+                 android:layout_width="fill_parent"
+                 android:layout_height="1dp"
+                 android:background="@android:color/darker_gray" />
+             
+             <LinearLayout
+                 android:id="@+id/sensor_lilaColors"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:orientation="horizontal" 
+                 >
+	         </LinearLayout>
         
-    
+         </LinearLayout>
+             
     </ViewFlipper>
 
 </RelativeLayout>

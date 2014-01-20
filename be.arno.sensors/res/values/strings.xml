@@ -17,11 +17,11 @@
     <string name="sensor_delay_ui">ui</string>
     <string name="sensor_delay_game">game</string>
     <string name="sensor_delay_fastest">fastest</string>
-    <string name="max_points">max points</string>
+    <string name="max_markers">max markers</string>
     <string name="x_factor">x factor</string>
     <string name="y_factor">y factor</string>
-    <string name="plus">➕</string>
-    <string name="minus">➖</string>
+    <string name="plus">+</string>
+    <string name="minus">−</string>
     <string name="title_activity_trigger">Trigger</string>
     <string name="help">\?</string>
     <string name="line_width">line width</string>
@@ -30,5 +30,7 @@
     <string name="marker_type_point">points</string>
     <string name="marker_type_line_point">points &amp; lines</string>
     <string name="background_color">graphe color</string>
-    
+	<string name="draw_axis">axis</string>
+	<string name="draw_seconds">seconds</string>
+	<string name="no_axis">no axis</string>
 </resources>

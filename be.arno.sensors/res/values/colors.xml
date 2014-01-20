@@ -51,8 +51,9 @@
     <color name="a_dark_orange">#FF8800</color>
     <color name="a_dark_red">   #CC0000</color>
     
+    <color name="background">#FFDFDFDF</color>
+    
     <color name="gray_3">  #2F7F7F7F</color>
     <color name="gray_5">  #4F7F7F7F</color>
-    
-    
+        
 </resources>

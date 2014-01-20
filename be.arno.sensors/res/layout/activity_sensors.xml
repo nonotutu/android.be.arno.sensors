@@ -7,7 +7,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SensorsActivity"
-    android:id="@+id/sensors_rela" >
+    android:id="@+id/sensors_rela"
+     >
+    
 
     <ScrollView
         android:id="@+id/scrollView1"
