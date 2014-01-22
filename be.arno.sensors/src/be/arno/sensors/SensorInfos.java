@@ -117,7 +117,7 @@ public final class SensorInfos {
 		case Sensor.TYPE_TEMPERATURE:
 			return R.drawable.ic_sensor_temperature;
 		case Sensor.TYPE_PROXIMITY:
-			return R.drawable.ic_sensor_proximity;
+			return R.drawable.ic_sensor_proximity_2;
 		case Sensor.TYPE_GRAVITY:
 			return R.drawable.ic_sensor_gravity;
 		case Sensor.TYPE_LINEAR_ACCELERATION:
