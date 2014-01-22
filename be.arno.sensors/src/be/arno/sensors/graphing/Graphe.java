@@ -27,7 +27,7 @@ import android.view.View;
 
 public class Graphe extends View {
 	
-	private static final String LOG_TAG = "Graphe extends ViewGroup";
+	private static final String LOG_TAG = "Graphe extends View";
 
 	public static final int MODE_MERGED = 0;
 	public static final int MODE_SPLIT = 1;
@@ -46,13 +46,12 @@ public class Graphe extends View {
 	private int numberOfDatas = 0;
 
 	// Paramétrables : aucune opération en aval
-	private float maxValue = 0;
 	private float xTimeFactor = 1;
 	private float yZoomFactor = 1;
 	private int mode = 0;        // MODE_MERGED
     private int marker_type = 0; // MARKER_TYPE_LINE
 	private int max_markers = 100;
-	private int marker_colors[];
+	private int marker_colors[] = new int[0];
 	private int draw_axis = 0;
 	
 	// Paramétrables : opérations en aval
@@ -61,6 +60,7 @@ public class Graphe extends View {
     private int axis_width = 5;
     private int marker_line_width = 5;
     private int marker_point_size = 10;
+	private float maxValue = 0;
     
     // Statiques
 	private final int default_data_line_color = 0xFFFFFFFF;
@@ -93,7 +93,10 @@ public class Graphe extends View {
     }
     
 	
-    public void setMaxValue(float maxValue) { this.maxValue = maxValue; }
+    public void changeMaxValue(float maxValue) {
+    	this.maxValue = maxValue;
+    	this.yFactor = (h/2) / maxValue;
+    }
 
 	public void setXTimeFactor(float xTimeFactor) { this.xTimeFactor = xTimeFactor; }
 	public float getXTimeFactor() { return this.xTimeFactor; }
@@ -308,7 +311,7 @@ public class Graphe extends View {
     	 * création de _linePaints_ blancs */
     	while ( newNumberOfDatas > linePaints.size() ) {
     		int c;
-    		if ( marker_colors.length >= linePaints.size() )
+    		if ( marker_colors.length > linePaints.size() )
     			c = marker_colors[linePaints.size()];
     		else
     			c = default_data_line_color;
@@ -319,7 +322,7 @@ public class Graphe extends View {
     	 * création de _pointPaints_ blancs */
     	while ( newNumberOfDatas > pointPaints.size() ) {
     		int c;
-    		if ( marker_colors.length >= pointPaints.size() )
+    		if ( marker_colors.length > pointPaints.size() )
     			c = marker_colors[pointPaints.size()];
     		else
     			c = default_data_line_color;

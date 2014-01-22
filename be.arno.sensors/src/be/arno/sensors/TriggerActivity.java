@@ -59,8 +59,10 @@ public class TriggerActivity extends Activity {
 
 		rela = (RelativeLayout)findViewById(R.id.trigger_rela);
 		txvwValues = (TextView)findViewById(R.id.trigger_txvwValues);
-		txvwName = (TextView)findViewById(R.id.trigger_txvwName);
+		txvwName = (TextView)findViewById(R.id.step_txvwName);
+		
 		txvwName.setText(sensor.getName());
+		txvwValues.setText("");
 		
 		state = false;
 		switchColors();
@@ -107,9 +109,6 @@ public class TriggerActivity extends Activity {
 			txvwValues.setText(
 					"· triggered at : "
 					+ millis2HR(new GregorianCalendar().getTimeInMillis())
-					+ " |-| value : "
-					+ event.values[0]
-					+ "\n"
 					+ txvwValues.getText().toString()
 					);
 			

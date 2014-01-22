@@ -29,7 +29,7 @@ import android.widget.TextView;
 public class SensorsActivity extends Activity implements SensorEventListener {
 
 	private SensorManager mSensorManager;
-    //private final TriggerEventListener mListener = new TriggerListener();
+    // private final TriggerEventListener mListener = new TriggerListener();
 
 	// private List<TextView> txvws;
 	private List<Sensor> deviceSensors;
@@ -63,9 +63,6 @@ public class SensorsActivity extends Activity implements SensorEventListener {
 	    Iterator<Sensor> sensors = deviceSensors.iterator();
 	    while (sensors.hasNext())
 	        lila.addView(caseSensor(sensors.next()));
-	    
-	    
-	    
 	    
 	}
 	
@@ -176,6 +173,10 @@ public class SensorsActivity extends Activity implements SensorEventListener {
 						if ( sensor.getType() == Sensor.TYPE_SIGNIFICANT_MOTION ) {
 							Intent intent = new Intent(getApplicationContext(), TriggerActivity.class);
 							intent.putExtra("trigger_type", sensor.getType());
+							startActivity(intent);
+						} else if ( sensor.getType() == Sensor.TYPE_STEP_COUNTER 
+								|| sensor.getType() == Sensor.TYPE_STEP_DETECTOR ) {
+							Intent intent = new Intent(getApplicationContext(), StepActivity.class);
 							startActivity(intent);
 						} else {
 							Intent intent = new Intent(getApplicationContext(), SensorActivity.class);

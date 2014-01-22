@@ -30,7 +30,9 @@
     <string name="marker_type_point">points</string>
     <string name="marker_type_line_point">points &amp; lines</string>
     <string name="background_color">graphe color</string>
-	<string name="draw_axis">axis</string>
-	<string name="draw_seconds">seconds</string>
-	<string name="no_axis">no axis</string>
+    <string name="draw_axis">axis</string>
+    <string name="draw_seconds">seconds</string>
+    <string name="no_axis">no axis</string>
+    <string name="title_activity_step">StepActivity</string>
+
 </resources>

@@ -47,7 +47,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	
 	private static final String LOG_TAG = "SensorActivity";
 
-	private SensorManager mSensorManager;
+	private SensorManager sensorManager;
 	private Sensor sensor;
 	private int numberOfEvents;
 
@@ -126,8 +126,8 @@ public class SensorActivity extends Activity implements SensorEventListener {
 		Intent intent = getIntent();
 		int sensor_type = intent.getExtras().getInt("sensor_type");
 
-		mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-		sensor = mSensorManager.getDefaultSensor(sensor_type);
+		sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		sensor = sensorManager.getDefaultSensor(sensor_type);
 		numberOfEvents = 0;
 
 	    isFillScreen = false;
@@ -207,7 +207,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	    txvwLineWidth.setText("" + lineWidths[lineWidth]);
 	    txvwPointSize.setText("" + pointSizes[pointSize]);
 
-	    graphe.setMaxValue(sensor.getMaximumRange());
+	    graphe.changeMaxValue(sensor.getMaximumRange());
 	    graphe.setColors(colors);
 
 	    graphe.setMaxMarkers(maxMarkers);
@@ -623,7 +623,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	protected void onResume() {
 		Log.i(LOG_TAG, "void onResume()");
 	    super.onResume();
-		mSensorManager.registerListener(this, sensor, mstgDelay.getValue() );
+		sensorManager.registerListener(this, sensor, mstgDelay.getValue() );
 	}
 
 	
@@ -632,7 +632,7 @@ public class SensorActivity extends Activity implements SensorEventListener {
 	protected void onPause() {
 		Log.i(LOG_TAG, "void onPause()");
 	    super.onPause();
-	    mSensorManager.unregisterListener(this);
+	    sensorManager.unregisterListener(this);
 	}
 	
 	private void initAnimation() {

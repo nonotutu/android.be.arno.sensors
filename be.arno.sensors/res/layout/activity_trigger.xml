@@ -16,16 +16,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/trigger_txvwName"
-        android:text="#" />
+        android:layout_below="@+id/step_txvwName"
+        android:text="@string/loremipsum" />
 
     <TextView
-        android:id="@+id/trigger_txvwName"
+        android:id="@+id/step_txvwName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="#"
+        android:text="@string/loremipsum"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
